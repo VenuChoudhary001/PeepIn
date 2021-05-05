@@ -1,16 +1,192 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+}
+body {
+  background-color: #d3d3d35c;
+}
+.navbar__fab {
+  position: fixed;
+  bottom: 50px;
+  right: 11px;
+  z-index: 100;
+  animation-name: fab;
+  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation-iteration-count: infinite;
+  animation-duration: 1.5s;
+}
+@keyframes fab {
+  0% {
+    transform: scale(1.05);
+    transition: all 0.25s ease-in-out;
+  }
+  20% {
+    transition: all 0.25s ease-in-out;
+
+    transform: scale(1.25);
+  }
+  50% {
+    transition: all 0.25s ease-in-out;
+
+    transform: scale(1.3);
+  }
+  70% {
+    transition: all 0.25s ease-in-out;
+
+    transform: scale(1.25);
+  }
+  90% {
+    transition: all 0.25s ease-in-out;
+
+    transform: scale(1.05);
+  }
+  100% {
+    transition: all 0.25s ease-in-out;
+
+    transform: scale(1);
+  }
+}
+.search__input {
+  font-size: 1rem;
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  background-color: #d3d3d3ab;
+  opacity: 0.8;
+  border: none;
+  border-radius: 30px;
+}
+.post__container {
+  background-color: white;
+  max-width: 550px;
+  margin: 1px auto;
+}
+.post__image {
+  object-fit: contain;
+  width: 100%;
+  max-width: 550px;
+}
+.home__share__thoughts {
+  background-color: #fff;
+  max-width: 550px;
+  margin: 1px auto;
+}
+.home__share__thoughts__input {
+  outline: none;
+  border: none;
+  background-color: #fff;
+  width: 100%;
+}
+.home__share__thoughts__input__wide__screen {
+  outline: none;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #d3d3d3ab;
+  border-radius: 20px;
+}
+.home__share__thoughts__input__wide__screen:hover {
+  cursor: pointer;
+}
+.home__layout__pointer {
+  margin: 1px auto;
+}
+.side__bar__avatar {
+  position: relative;
+  height: 150px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.side__bar__avatar__background {
+  position: absolute;
+  height: 100px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(21, 2, 2, 1) 2%,
+    rgba(14, 124, 95, 1) 46%
+  );
+  background: linear-gradient(90deg, #1cb5e0 0%, #000851 100%);
+  background: linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%);
+  background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  /* z-index: ; */
+}
+.side__bar__root {
+  position: fixed;
+  top: 62px;
+  left: 51px;
+  width: 20%;
+  background-color: #fff;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.widgets__root {
+  background-color: #fff;
+}
+.logo {
+  animation-name: logo-spin;
+  animation-timing-function: linear;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+@keyframes logo-spin {
+  0% {
+    transition: all 0.25s linear;
+    transform: rotate(180deg, 180deg);
+  }
+  100% {
+    transition: all 0.25s linear;
+    transform: rotate(360deg, 360deg);
+  }
+}
+.login__input,
+.sign__up__input {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid teal;
+  width: 100%;
+  background: transparent;
+}
+.login__image {
+  object-fit: contain;
+  width: 100%;
+}
+.sign__up__image {
+  width: 100%;
+  max-width: 400px;
+  object-fit: contain;
+}
+
+.account__header__banner__root {
+  position: relative;
+  height: 275px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 1px auto;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  /* box-shadow: -0.5rem -0.5rem 1rem grey; */
+}
+.account__header__banner {
+  position: absolute;
+  height: 200px;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  background: url("https://source.unsplash.com/random") no-repeat center/cover;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.account__header__avatar {
+  position: absolute;
+  top: 55%;
+  left: 5%;
 }
