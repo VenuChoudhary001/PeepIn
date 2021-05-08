@@ -14,6 +14,7 @@ import PhotoSizeSelectActualIcon from "@material-ui/icons/PhotoSizeSelectActual"
 import InputOption from "../components/inputOption";
 import VideocamIcon from "@material-ui/icons/Videocam";
 import ArtTrackIcon from "@material-ui/icons/ArtTrack";
+import Link from "next/link";
 const useStyles = makeStyles((theme) => ({
   largeAvatar: {
     width: theme.spacing(7),
@@ -35,11 +36,13 @@ function CreatePost() {
               </Icon>
             </Grid>
             <Grid item xs>
-              <input
-                type="text"
-                placeholder="Share your thoughts"
-                className="mx-2 px-2 py-1 home__share__thoughts__input"
-              />
+              <Link href="/home/post-modal">
+                <input
+                  type="text"
+                  placeholder="Share your thoughts"
+                  className="mx-2 px-2 py-1 home__share__thoughts__input"
+                />
+              </Link>
             </Grid>
           </Grid>
         </div>

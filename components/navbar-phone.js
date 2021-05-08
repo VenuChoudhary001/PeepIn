@@ -96,7 +96,7 @@ function Navbar() {
             className={classes.tabsGrid}
           >
             <Grid item xs={4} className="text-center">
-              <Link href="/">
+              <Link href="/home/home">
                 <HomeIcon />
               </Link>
               <Typography variant="subtitle2">Home</Typography>
@@ -108,7 +108,7 @@ function Navbar() {
             </Grid>
 
             <Grid item xs={4} className="text-center">
-              <Link href="/">
+              <Link href="/profile/account">
                 <AccountCircleIcon />
               </Link>
 
@@ -117,11 +117,11 @@ function Navbar() {
           </Grid>
         </Toolbar>
       </AppBar>
-      <div className="navbar__fab">
+      {/* <div className="navbar__fab">
         <Fab color="secondary">
           <AddIcon style={{ color: "#fff" }} />
         </Fab>
-      </div>
+      </div> */}
     </>
   );
 }

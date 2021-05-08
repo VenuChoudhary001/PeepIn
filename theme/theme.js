@@ -33,6 +33,11 @@ const THEME = createMuiTheme({
       fontFamily: "Raleway",
       fontWeight: 500,
     },
+    h3: {
+      fontFamily: "Antonio",
+      fontWeight: 700,
+    },
+    h5: { fontFamily: "Poppins", fontWeight: 200 },
   },
   palette: {
     primary: {

@@ -6,7 +6,7 @@ import Thumbnails from "../../components/thumbnails";
 
 function Account() {
   return (
-    <>
+    <div style={{ backgroundColor: "#e6e4e4" }}>
       <Grid container direction="column">
         <Grid item>
           <AccountHeader />
@@ -19,11 +19,17 @@ function Account() {
               justify="flex-start"
               alignItems="center"
               direction="row"
-            ></Grid>
+              spacing={2}
+            >
+              <Thumbnails
+                image="https://source.unsplash.com/random"
+                content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate provident, nesciunt quo perferendis eius in dolor quos, molestiae explicabo sit veritatis, nemo vero ducimus quisquam!"
+              />
+            </Grid>
           </div>
         </Container>
       </Grid>
-    </>
+    </div>
   );
 }
 

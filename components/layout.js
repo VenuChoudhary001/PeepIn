@@ -4,9 +4,11 @@ import { ThemeProvider, useMediaQuery } from "@material-ui/core";
 import Navbar from "./navbar-phone";
 import NavWideScreen from "./navbar";
 import { useTheme } from "@material-ui/styles";
+import { useRouter } from "next/router";
 function Layout({ children }) {
   const theme = useTheme();
   const mdUp = useMediaQuery(theme.breakpoints.up("md"));
+  const route = useRouter();
   return (
     <>
       <Head>
@@ -33,9 +35,28 @@ function Layout({ children }) {
           href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500&display=swap"
           rel="stylesheet"
         ></link>
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&display=swap"
+          rel="stylesheet"
+        ></link>
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200&display=swap"
+          rel="stylesheet"
+        />
       </Head>
-
-      {mdUp ? <NavWideScreen /> : <Navbar />}
+      {route.pathname !== "/" &&
+      route.pathname !== "/login" &&
+      route.pathname !== "/signup" ? (
+        mdUp ? (
+          <NavWideScreen />
+        ) : (
+          <Navbar />
+        )
+      ) : (
+        ""
+      )}
 
       {children}
 

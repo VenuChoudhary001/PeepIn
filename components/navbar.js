@@ -29,7 +29,8 @@ function NavWideScreen() {
       },
     },
     tabsGrid: {
-      marginRight: "auto",
+      color: "darkgrey",
+      marginLeft: "auto",
       "& .MuiGrid-item": {
         marginTop: 0,
         paddingTop: 0,
@@ -38,6 +39,7 @@ function NavWideScreen() {
           // borderBottom: "2px solid black",
           cursor: "pointer",
           color: "black",
+          fontWeight: "bolder",
         },
         "&:active": {
           // borderBottom: "2px solid black",
@@ -64,10 +66,38 @@ function NavWideScreen() {
               spacing={1}
               className={classes.root}
             >
-              <Grid item>
-                <Icon color="secondary" className={classes.iconButton}>
-                  <ControlCameraIcon />
-                </Icon>
+              <Grid
+                item
+                xs
+                container
+                justify="flex-start"
+                alignItems="center"
+                // className="d-flex"
+              >
+                <Grid item>
+                  <Icon color="secondary" className={classes.iconButton}>
+                    <ControlCameraIcon />
+                  </Icon>
+                </Grid>
+                <Grid item>
+                  <Link href="/home">
+                    <Typography
+                      variant="h4"
+                      style={{ fontWeight: "700", cursor: "pointer" }}
+                    >
+                      Peep
+                    </Typography>
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Typography
+                    variant="h4"
+                    color="secondary"
+                    style={{ fontWeight: "700" }}
+                  >
+                    In
+                  </Typography>
+                </Grid>
               </Grid>
               <Grid item xs={4}>
                 <input
@@ -81,7 +111,7 @@ function NavWideScreen() {
                   <SearchIcon />
                 </IconButton>
               </Grid>
-              {/* <Grid item xs></Grid> */}
+
               <Grid
                 item
                 xs
@@ -91,15 +121,15 @@ function NavWideScreen() {
                 className={classes.tabsGrid}
               >
                 <Grid item className="text-center" xs={4}>
-                  <Link href="/">
+                  <Link href="/home/home">
                     <HomeIcon />
                   </Link>
-                  {/* <Typography variant="body2">Home</Typography> */}
+                  <Typography variant="body2">Home</Typography>
                 </Grid>
                 <Grid item className="text-center" xs={4}>
                   <SupervisorAccountIcon />
 
-                  {/* <Typography variant="body2">My Network</Typography> */}
+                  <Typography variant="body2">My Network</Typography>
                 </Grid>
 
                 <Grid item className="text-center" xs={4}>
@@ -107,10 +137,10 @@ function NavWideScreen() {
                     <AccountCircleIcon />
                   </Link>
 
-                  {/* <Typography variant="body2">Me</Typography> */}
+                  <Typography variant="body2">Me</Typography>
                 </Grid>
               </Grid>
-              <Grid item xs></Grid>
+              {/* <Grid item xs></Grid> */}
             </Grid>
           </Container>
         </Toolbar>

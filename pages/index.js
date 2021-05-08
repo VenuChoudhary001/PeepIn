@@ -1,75 +1,66 @@
-import React, { useState, useEffect } from "react";
-import { db } from "../lib/firebase";
-import Post from "../components/post";
-import CreatePost from "../components/createpost-box";
-import { Container, Grid, useMediaQuery } from "@material-ui/core";
-import SideBar from "../components/side-bar";
-import { useTheme } from "@material-ui/core";
-import Widgets from "../components/widgets";
-function Home() {
-  const theme = useTheme();
-  const mdUp = useMediaQuery(theme.breakpoints.up("md"));
-  /*
-  const [post, setPost] = useState();
-  const [inputpost, setInputPost] = useState();
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    db.collection("posts").add({
-      message: inputpost,
-    });
-  };
-  /*
-  useEffect(() => {
-    db.collection("posts").onSnapshot((snapshot) => {
-      setPost(
-        snapshot.docs.map((item) => {
-          return { ...item.data() };
-        })
-      );
-    });
-  }, []);*/
+import { Grid, Typography } from "@material-ui/core";
+import React from "react";
+import LandingHeader from "../components/landing-header";
+import Link from "next/link";
+function Landing() {
   return (
-    <>
-      <Container className="home_layout_root ">
-        <Grid container justify="flex-start" direction="row" spacing={1}>
-          {mdUp ? (
-            <Grid item xs={3}>
-              <SideBar
-                imageURL="https://source.unsplash.com/random"
-                bio="Front End Web Developer, Freshman@ NIT Durgapur"
-                user="Venu Choudhary"
-              />
-            </Grid>
-          ) : (
-            ""
-          )}
-
-          <Grid item xs container justify="flex-start" direction="column">
-            <Grid item>
-              <CreatePost />
-            </Grid>
-            <Grid item>
-              <Post />
-            </Grid>
-            <Grid item>
-              <Post />
-            </Grid>
-          </Grid>
-          {mdUp ? (
-            <Grid item xs={3}>
-              <Widgets />
-            </Grid>
-          ) : (
-            ""
-          )}
+    <div style={{ backgroundColor: "#fff", height: "750px" }}>
+      <LandingHeader />
+      {/* <hr style={{ border: "3px solid darkgrey" }} /> */}
+      <Grid
+        container
+        justify="flex-start"
+        alignItems="center"
+        className="my-2 py-2"
+      >
+        <Grid item xs={12} className="text-center">
+          <Typography
+            variant="h6"
+            color="secondary"
+            style={{ fontWeight: "bold" }}
+          >
+            Open JOBS.People Hiring !
+          </Typography>
         </Grid>
-      </Container>
-    </>
+        <Grid item xs={12} sm={6}>
+          <img src="/landing-page.png" className="landing__page__image" />
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          container
+          justify="flex-start"
+          alignItems="center"
+          direction="column"
+          className="text-center my-4 py-2"
+        >
+          <Grid item>
+            <Typography
+              variant="h4"
+              color="secondary"
+              // style={{ fontWeight: "bold" }}
+            >
+              Welcome to Our Community
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant="h5" color="secondary">
+              Let the right people know you’re open to work{" "}
+              {/* <Typography variant="body1">
+                Join your colleagues, classmates, and friends on PeepIn.
+              </Typography> */}
+            </Typography>
+          </Grid>
+          <Grid item className="my-2 py-2">
+            <Link href="/signup">
+              <button className="header__button">JOIN US</button>
+            </Link>
+          </Grid>
+        </Grid>
+      </Grid>
+    </div>
   );
 }
 
-export default Home;
-
-/**
- 
- */
+export default Landing;

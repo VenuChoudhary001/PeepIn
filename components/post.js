@@ -22,7 +22,7 @@ function Post() {
   const classes = useStyles();
   return (
     <>
-      <div className="post__container my-3">
+      <div className="post__container my-2 pt-3">
         <Grid
           container
           justify="flex-start"

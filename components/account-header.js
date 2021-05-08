@@ -1,7 +1,16 @@
 import React from "react";
-import { Avatar, Badge, Container, Grid, Typography } from "@material-ui/core";
+import {
+  Avatar,
+  Badge,
+  Button,
+  Container,
+  Grid,
+  Icon,
+  Typography,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
+import CreateIcon from "@material-ui/icons/Create";
 const useStyles = makeStyles((theme) => ({
   rootAvatar: {
     width: theme.spacing(15),
@@ -49,7 +58,12 @@ function AccountHeader() {
         </Grid>
         <Container>
           <Grid item className="px-3">
-            <Typography variant="h5">Venu Choudhary</Typography>
+            <Typography variant="h5">
+              Venu Choudhary
+              <Icon style={{ cursor: "pointer" }}>
+                <CreateIcon />
+              </Icon>
+            </Typography>
           </Grid>
           <Grid item className="px-3">
             <Typography variant="h6">
@@ -59,9 +73,28 @@ function AccountHeader() {
           <Grid item className="px-3">
             <Typography variant="body1">Kolkata West Bengal</Typography>
           </Grid>
-          <Grid item className="px-3">
-            <Typography variant="subtitle1">153 Connections</Typography>
+          <Grid
+            item
+            container
+            justify="space-between"
+            alignItems="center"
+            className="px-3"
+          >
+            <Grid item>
+              <Typography variant="subtitle1">153 Connections</Typography>
+            </Grid>
+            <Grid item>
+              <Button
+                variant="contained"
+                // size="large"
+                style={{ color: "#fff" }}
+                color="secondary"
+              >
+                sign out
+              </Button>
+            </Grid>
           </Grid>
+
           <hr style={{ border: "2px solid darkgrey" }} />
         </Container>
       </Grid>
