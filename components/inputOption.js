@@ -1,10 +1,13 @@
 import { IconButton, Typography } from "@material-ui/core";
-import React from "react";
-
-function InputOption({ icon, type, color }) {
+import React, { useState } from "react";
+import ImageUpload from "../helpers/imageUpload";
+function InputOption({ icon, type, color, bucket }) {
+  const [open, setOpen] = useState(false);
   return (
     <>
-      <IconButton style={{ color: `${color}` }}>{icon} </IconButton>
+      <IconButton style={{ color: `${color}` }} onClick={() => setOpen(!open)}>
+        {icon}
+      </IconButton>
       <Typography
         variant="caption"
         // className="px-1"
@@ -12,6 +15,11 @@ function InputOption({ icon, type, color }) {
       >
         {type}
       </Typography>
+      {type == "Photo" ? (
+        <ImageUpload open={open} close={setOpen} bucket={bucket} />
+      ) : (
+        ""
+      )}
     </>
   );
 }

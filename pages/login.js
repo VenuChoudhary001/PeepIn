@@ -48,13 +48,15 @@ function Login() {
         console.log("this is data", data);
         setDisplay(!display);
         setDisplayMessage({
-          mess: `WELOME BACK`,
+          mess: `WELOME BACK `,
           code: "#e53935",
         });
         const getUSER_DATA = await db.collection("Users").doc(data.uid).get();
         const USER_INFO = await getUSER_DATA.data();
         console.log("this is user data", getUSER_DATA);
         console.log("this is user info", USER_INFO);
+        setUser({ ...USER_INFO });
+        route.replace("/home/home");
       } catch (error) {
         setDisplay(!display);
         setDisplayMessage({

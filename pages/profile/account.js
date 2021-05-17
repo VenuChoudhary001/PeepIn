@@ -1,10 +1,15 @@
 import { Container, Grid } from "@material-ui/core";
-import React from "react";
+import React, { useContext } from "react";
 import AccountHeader from "../../components/account-header";
 import Post from "../../components/post";
+import Sorry from "../../components/sorry";
 import Thumbnails from "../../components/thumbnails";
-
+import ProfileContext from "../../context/user";
 function Account() {
+  const { setUser, user } = useContext(ProfileContext);
+  if (!user) {
+    return <Sorry />;
+  }
   return (
     <div style={{ backgroundColor: "#e6e4e4" }}>
       <Grid container direction="column">

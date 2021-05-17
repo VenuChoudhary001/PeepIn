@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import {
   Avatar,
   Container,
@@ -15,6 +15,8 @@ import InputOption from "../components/inputOption";
 import VideocamIcon from "@material-ui/icons/Videocam";
 import ArtTrackIcon from "@material-ui/icons/ArtTrack";
 import Link from "next/link";
+import ProfileContext from "../context/user";
+import CreatePostDialogue from "../helpers/createPostDialogue";
 const useStyles = makeStyles((theme) => ({
   largeAvatar: {
     width: theme.spacing(7),
@@ -22,9 +24,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function CreatePost() {
+  const { user } = useContext(ProfileContext);
   const theme = useTheme();
   const smUp = useMediaQuery(theme.breakpoints.up("sm"));
   const classes = useStyles();
+  const [showPostBox, setShowPostBox] = useState(false);
   return (
     <>
       {!smUp ? (
@@ -59,8 +63,8 @@ function CreatePost() {
               <Grid item container justify="flex-start" alignItems="flex-start">
                 <Grid item>
                   <Avatar
-                    src="https://source.unsplash.com/random"
-                    alt="venu"
+                    src={user.imageURL}
+                    alt={user.userName}
                     className={classes.largeAvatar}
                   />
                 </Grid>
@@ -69,6 +73,7 @@ function CreatePost() {
                     type="text"
                     className="home__share__thoughts__input__wide__screen mx-2 px-3"
                     placeholder="Start a post"
+                    onClick={() => setShowPostBox(!showPostBox)}
                   />
                 </Grid>
                 <hr style={{ border: "1px solid grey" }} />
@@ -84,6 +89,7 @@ function CreatePost() {
                     icon={<PhotoSizeSelectActualIcon />}
                     type="Photo"
                     color="rgb(29,161,242)"
+                    bucket="post"
                   />
                 </Grid>
                 <Grid item>
@@ -103,6 +109,7 @@ function CreatePost() {
               </Grid>
             </Grid>
           </Container>
+          <CreatePostDialogue open={showPostBox} close={setShowPostBox} />
         </div>
       )}
     </>

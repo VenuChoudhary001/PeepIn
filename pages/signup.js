@@ -51,6 +51,7 @@ function Signup() {
             },
           });
         setUser({
+          uid: data.uid,
           userName: userName,
           profileURL: "",
           imageURL: "",
@@ -65,6 +66,7 @@ function Signup() {
           },
         });
         console.log(user);
+        route.replace("/home/home");
       } catch (error) {
         setDisplay(!display);
         setDisplayMessage({

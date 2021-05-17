@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import {
   Avatar,
   Badge,
@@ -11,6 +11,10 @@ import {
 import { makeStyles } from "@material-ui/styles";
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 import CreateIcon from "@material-ui/icons/Create";
+import ProfileContext from "../context/user";
+import ImageUpload from "../helpers/imageUpload";
+import UploadText from "../helpers/uploadText";
+
 const useStyles = makeStyles((theme) => ({
   rootAvatar: {
     width: theme.spacing(15),
@@ -25,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function AccountHeader() {
+  const { setUser, user } = useContext(ProfileContext);
+  const [open, setOpen] = useState(false);
+  const [addBio, setAddBio] = useState(false);
   const classes = useStyles();
   return (
     <div className="account__header mt-4">
@@ -39,7 +46,9 @@ function AccountHeader() {
             <div className="account__header__banner"></div>
             <div className="account__header__avatar">
               <Badge
-                badgeContent={<PhotoCameraIcon />}
+                badgeContent={
+                  <PhotoCameraIcon onClick={() => setOpen(!open)} />
+                }
                 anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
                 classes={{
                   anchorOriginBottomRightCircle: classes.badgeRoot,
@@ -48,8 +57,8 @@ function AccountHeader() {
                 style={{ cursor: "pointer" }}
               >
                 <Avatar
-                  src="https://source.unsplash.com/random"
-                  alt="Vser"
+                  src={user.imageURL}
+                  alt={user.userName}
                   className={classes.rootAvatar}
                 />
               </Badge>
@@ -58,20 +67,7 @@ function AccountHeader() {
         </Grid>
         <Container>
           <Grid item className="px-3">
-            <Typography variant="h5">
-              Venu Choudhary
-              <Icon style={{ cursor: "pointer" }}>
-                <CreateIcon />
-              </Icon>
-            </Typography>
-          </Grid>
-          <Grid item className="px-3">
-            <Typography variant="h6">
-              Front end web developer | Freshman@NIT Durgapur
-            </Typography>
-          </Grid>
-          <Grid item className="px-3">
-            <Typography variant="body1">Kolkata West Bengal</Typography>
+            <Typography variant="h5">{user.userName}</Typography>
           </Grid>
           <Grid
             item
@@ -81,7 +77,31 @@ function AccountHeader() {
             className="px-3"
           >
             <Grid item>
-              <Typography variant="subtitle1">153 Connections</Typography>
+              <Typography variant="subtitle2">
+                {user.bio || "ADD BIO"}
+                <Icon
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setAddBio(!addBio)}
+                >
+                  <CreateIcon />
+                </Icon>
+              </Typography>
+            </Grid>
+          </Grid>
+          {/* <Grid item className="px-3">
+            <Typography variant="body1">Kolkata West Bengal</Typography>
+          </Grid> */}
+          <Grid
+            item
+            container
+            justify="space-between"
+            alignItems="center"
+            className="px-3"
+          >
+            <Grid item>
+              <Typography variant="subtitle1">
+                {user.followers.followersCount} Connections
+              </Typography>
             </Grid>
             <Grid item>
               <Button
@@ -98,6 +118,8 @@ function AccountHeader() {
           <hr style={{ border: "2px solid darkgrey" }} />
         </Container>
       </Grid>
+      <ImageUpload open={open} close={setOpen} bucket="profile" />
+      <UploadText open={addBio} close={setAddBio} type="bio" />
     </div>
   );
 }

@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SideBar({ imageURL, user, bio }) {
+function SideBar({ imageURL, user, bio, followersCount }) {
   const classes = useStyles();
   return (
     <>
@@ -72,7 +72,7 @@ function SideBar({ imageURL, user, bio }) {
                   variant="caption"
                   style={{ color: "rgb(29,161,242)", fontWeight: "bold" }}
                 >
-                  47
+                  {followersCount}
                 </Typography>
               </Grid>
             </Grid>

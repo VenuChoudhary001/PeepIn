@@ -6,11 +6,22 @@ import {
   makeStyles,
   Icon,
   IconButton,
+  Button,
 } from "@material-ui/core";
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ThumbUpOutlinedIcon from "@material-ui/icons/ThumbUpOutlined";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import MessageOutlinedIcon from "@material-ui/icons/MessageOutlined";
 import ShareOutlinedIcon from "@material-ui/icons/ShareOutlined";
+import {
+  addArray,
+  db,
+  increment,
+  removeArray,
+  serverTime,
+} from "../lib/firebase";
+import ProfileContext from "../context/user";
 const useStyles = makeStyles((theme) => ({
   largeAvatar: {
     width: theme.spacing(6),
@@ -18,8 +29,98 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Post() {
+function Post({ data }) {
   const classes = useStyles();
+  const [avatar, setAvatar] = useState();
+  const { user } = useContext(ProfileContext);
+  const [like, setLike] = useState(true);
+  const [showComment, setShowComment] = useState(false);
+  const [myComment, setMyComment] = useState();
+  const [allCommetns, setAllComments] = useState();
+  const [postComment, setPostComment] = useState(false);
+  // if (data.publishedAt) {
+  //   const getDate = new Date(data.publishedAt.toMillis());
+  // }
+
+  useEffect(() => {
+    db.collection("Users")
+      .doc(data.creator)
+      .get()
+      .then((doc) => {
+        setAvatar({ ...doc.data() });
+      });
+    if (data.likes.usersLiked) {
+      data.likes.usersLiked.forEach((item) => {
+        if (item === user.uid) setLike(!like);
+      });
+    }
+  }, []);
+
+  if (!avatar) {
+    return <>Loading....</>;
+  }
+
+  const handleLike = () => {
+    setLike(!like);
+    db.collection("posts")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          if (doc.data().uid === data.uid) {
+            db.collection("posts")
+              .doc(doc.id)
+              .update({
+                likes: {
+                  likesCount: like ? increment(1) : increment(-1),
+                  usersLiked: like ? addArray(user.uid) : removeArray(user.uid),
+                },
+              });
+          }
+        });
+      });
+  };
+  const updateComment = (e) => {
+    e.preventDefault();
+    db.collection("posts")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          if (doc.data().uid === data.uid) {
+            db.collection("posts")
+              .doc(doc.id)
+              .update({
+                comments: addArray({
+                  user: user.uid,
+                  content: myComment,
+                  userName: user.userName,
+                }),
+              });
+          }
+        });
+      });
+
+    setMyComment();
+    setShowComment(!showComment);
+  };
+  const handleComment = () => {
+    setShowComment(!showComment);
+    db.collection("posts")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          if (doc.data().uid === data.uid) {
+            db.collection("posts")
+              .doc(doc.id)
+              .get()
+              .then((querySnapshot) => {
+                console.log(querySnapshot.data());
+                setAllComments(querySnapshot.data().comments);
+              });
+          }
+        });
+      });
+  };
+
   return (
     <>
       <div className="post__container my-2 pt-3">
@@ -40,33 +141,39 @@ function Post() {
             >
               <Grid item>
                 <Avatar
-                  src="https://source.unsplash.com/random"
+                  src={avatar.imageURL}
                   className={classes.largeAvatar}
-                  alt="Venu"
+                  alt={avatar.userName}
                 />
               </Grid>
               <Grid item xs>
-                <Typography variant="subtitle1">Venu Choudhary</Typography>
+                <Typography variant="subtitle1">{avatar.userName}</Typography>
                 <Typography variant="body2" style={{ lineHeight: "0.95" }}>
-                  Front End Web developer, Freshman@NIT Durgapur
+                  {avatar.bio}
                 </Typography>
-                <Typography variant="caption">1d</Typography>
+                <Typography variant="caption">
+                  {/* {getDate ? getDate.toDateString() :} */}
+                  {data.publishedAt
+                    ? new Date(data.publishedAt.toMillis()).toDateString()
+                    : "Just now"}
+                </Typography>
               </Grid>
             </Grid>
             <Grid item>
-              <Typography>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel
-                consequatur cumque culpa mollitia totam incidunt porro sequi
-                quae earum itaque!
-              </Typography>
+              <Typography>{data.content}</Typography>
             </Grid>
           </Container>
-          <Grid item>
-            <img
-              src="https://source.unsplash.com/random"
-              alt="hi"
-              className="post__image"
-            />
+          <Grid item className="post__image__container">
+            {data.image !== null ? (
+              <img
+                src={data.image}
+                alt="hi"
+                className="post__image"
+                onDoubleClick={handleLike}
+              />
+            ) : (
+              ""
+            )}
           </Grid>
           <Container>
             <Grid
@@ -79,18 +186,15 @@ function Post() {
             >
               <Grid item>
                 <Icon color="secondary">
-                  <ThumbUpOutlinedIcon
-                    style={{ fontSize: "20" }}
-                    // color="secondary"
-                  />
+                  <FavoriteIcon style={{ fontSize: "20", color: "black" }} />
                 </Icon>
                 <Typography variant="caption" style={{ fontWeight: "bold" }}>
-                  21
+                  {data.likes.likesCount > 0 ? data.likes.likesCount : 0}
                 </Typography>
               </Grid>
               <Grid item>
                 <Typography variant="body2" style={{ fontWeight: "bold" }}>
-                  2 comments
+                  {data.comments ? data.comments.length : 0} comments
                 </Typography>
               </Grid>
             </Grid>
@@ -103,14 +207,18 @@ function Post() {
               className="mx-2 text-center pb-1 mb-1"
             >
               <Grid item xs={4}>
-                <IconButton>
-                  <ThumbUpOutlinedIcon />
+                <IconButton onClick={handleLike}>
+                  {like ? (
+                    <FavoriteBorderIcon />
+                  ) : (
+                    <FavoriteIcon style={{ color: "red", border: "none" }} />
+                  )}
                 </IconButton>
 
                 <Typography variant="caption">Like</Typography>
               </Grid>
               <Grid item xs={4}>
-                <IconButton>
+                <IconButton onClick={handleComment}>
                   <MessageOutlinedIcon />
                 </IconButton>
 
@@ -124,6 +232,72 @@ function Post() {
                 <Typography variant="caption">Share</Typography>
               </Grid>
             </Grid>
+            {showComment ? (
+              <Grid
+                item
+                justify="flex-start"
+                alignItems="center"
+                container
+                className="my-1"
+              >
+                {allCommetns
+                  ? allCommetns.map((item) => (
+                      <Grid
+                        item
+                        container
+                        justify="flex-start"
+                        alignItems="center"
+                        spacing={1}
+                      >
+                        <Grid item>
+                          <Typography variant="h6" style={{ fontSize: "1rem" }}>
+                            {item.userName}
+                          </Typography>
+                        </Grid>
+                        <Grid item>
+                          <Typography
+                            variant="caption"
+                            style={{ fontWeight: 600 }}
+                          >
+                            {item.content}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    ))
+                  : ""}
+
+                <Grid
+                  item
+                  container
+                  justify="flex-start"
+                  alignItems="center"
+                  spacing={1}
+                >
+                  <Grid item xs={9}>
+                    <input
+                      type="text"
+                      value={myComment}
+                      onChange={(e) => setMyComment(e.target.value)}
+                      className="post__comment__input mx-1 px-2"
+                    />
+                  </Grid>
+                  <Grid item xs={1}>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      disableElevation
+                      size="small"
+                      style={{ color: "#fff", margin: "1px 1px" }}
+                      onClick={updateComment}
+                    >
+                      POST
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Grid>
+            ) : (
+              ""
+            )}
           </Container>
         </Grid>
       </div>
