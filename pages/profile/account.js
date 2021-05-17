@@ -1,7 +1,6 @@
 import { Container, Grid } from "@material-ui/core";
 import React, { useContext } from "react";
 import AccountHeader from "../../components/account-header";
-import Post from "../../components/post";
 import Sorry from "../../components/sorry";
 import Thumbnails from "../../components/thumbnails";
 import ProfileContext from "../../context/user";
@@ -14,7 +13,7 @@ function Account() {
     <div style={{ backgroundColor: "#e6e4e4" }}>
       <Grid container direction="column">
         <Grid item>
-          <AccountHeader />
+          <AccountHeader user={user} type="self" />
         </Grid>
         <Container>
           <div className="mb-2">

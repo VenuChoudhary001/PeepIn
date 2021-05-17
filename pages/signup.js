@@ -42,11 +42,11 @@ function Signup() {
             imageURL: "",
             bio: "",
             followers: {
-              followersCount: "",
+              followersCount: 0,
               followersList: [],
             },
             following: {
-              followingCount: "",
+              followingCount: 0,
               followingList: [],
             },
           });
@@ -57,11 +57,11 @@ function Signup() {
           imageURL: "",
           bio: "",
           followers: {
-            followersCount: "",
+            followersCount: 0,
             followersList: [],
           },
           following: {
-            followingCount: "",
+            followingCount: 0,
             followingList: [],
           },
         });
@@ -81,7 +81,7 @@ function Signup() {
   };
 
   return (
-    <div style={{ backgroundColor: "#fff" }}>
+    <div style={{ backgroundColor: "#fff", minHeight: "900px" }}>
       <LandingHeader />
       <Container className="my-4 py-4">
         <Grid

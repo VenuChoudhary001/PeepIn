@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   Avatar,
   Badge,
@@ -14,6 +14,7 @@ import CreateIcon from "@material-ui/icons/Create";
 import ProfileContext from "../context/user";
 import ImageUpload from "../helpers/imageUpload";
 import UploadText from "../helpers/uploadText";
+import { db } from "../lib/firebase";
 
 const useStyles = makeStyles((theme) => ({
   rootAvatar: {
@@ -28,11 +29,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AccountHeader() {
-  const { setUser, user } = useContext(ProfileContext);
+function AccountHeader({ user, type }) {
+  // const { setUser, user } = useContext(ProfileContext);
   const [open, setOpen] = useState(false);
   const [addBio, setAddBio] = useState(false);
   const classes = useStyles();
+  const [connect, setConnect] = useState();
+  useEffect(() => {
+    db.collection("Users")
+      .doc(user.uid)
+      .onSnapshot((querySnapshot) => {
+        setConnect(querySnapshot.data().followers.followersCount);
+      });
+  }, []);
   return (
     <div className="account__header mt-4">
       <Grid
@@ -47,7 +56,11 @@ function AccountHeader() {
             <div className="account__header__avatar">
               <Badge
                 badgeContent={
-                  <PhotoCameraIcon onClick={() => setOpen(!open)} />
+                  type !== "other" ? (
+                    <PhotoCameraIcon onClick={() => setOpen(!open)} />
+                  ) : (
+                    ""
+                  )
                 }
                 anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
                 classes={{
@@ -79,18 +92,20 @@ function AccountHeader() {
             <Grid item>
               <Typography variant="subtitle2">
                 {user.bio || "ADD BIO"}
-                <Icon
-                  style={{ cursor: "pointer" }}
-                  onClick={() => setAddBio(!addBio)}
-                >
-                  <CreateIcon />
-                </Icon>
+                {type !== "other" ? (
+                  <Icon
+                    style={{ cursor: "pointer" }}
+                    onClick={() => setAddBio(!addBio)}
+                  >
+                    <CreateIcon />
+                  </Icon>
+                ) : (
+                  ""
+                )}
               </Typography>
             </Grid>
           </Grid>
-          {/* <Grid item className="px-3">
-            <Typography variant="body1">Kolkata West Bengal</Typography>
-          </Grid> */}
+
           <Grid
             item
             container
@@ -100,18 +115,9 @@ function AccountHeader() {
           >
             <Grid item>
               <Typography variant="subtitle1">
-                {user.followers.followersCount} Connections
+                {connect > 0 ? connect : "0"}
+                Connections
               </Typography>
-            </Grid>
-            <Grid item>
-              <Button
-                variant="contained"
-                // size="large"
-                style={{ color: "#fff" }}
-                color="secondary"
-              >
-                sign out
-              </Button>
             </Grid>
           </Grid>
 

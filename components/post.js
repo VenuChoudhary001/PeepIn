@@ -9,7 +9,7 @@ import {
   Button,
 } from "@material-ui/core";
 import React, { useState, useEffect, useContext } from "react";
-import ThumbUpOutlinedIcon from "@material-ui/icons/ThumbUpOutlined";
+import Link from "next/link";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import MessageOutlinedIcon from "@material-ui/icons/MessageOutlined";
@@ -38,6 +38,9 @@ function Post({ data }) {
   const [myComment, setMyComment] = useState();
   const [allCommetns, setAllComments] = useState();
   const [postComment, setPostComment] = useState(false);
+  const { likes } = data;
+  const { likesCount, usersLiked } = likes;
+  console.log("this is likes count :", likes, usersLiked, likesCount);
   // if (data.publishedAt) {
   //   const getDate = new Date(data.publishedAt.toMillis());
   // }
@@ -71,8 +74,12 @@ function Post({ data }) {
               .doc(doc.id)
               .update({
                 likes: {
-                  likesCount: like ? increment(1) : increment(-1),
-                  usersLiked: like ? addArray(user.uid) : removeArray(user.uid),
+                  likesCount: like
+                    ? increment(likesCount + 1)
+                    : increment(likesCount - 1),
+                  usersLiked: like
+                    ? [...usersLiked, user.uid]
+                    : removeArray(user.uid),
                 },
               });
           }
@@ -147,12 +154,15 @@ function Post({ data }) {
                 />
               </Grid>
               <Grid item xs>
-                <Typography variant="subtitle1">{avatar.userName}</Typography>
+                <Link href={`/profile/${avatar.uid}`}>
+                  <Typography variant="subtitle1" style={{ cursor: "pointer" }}>
+                    {avatar.userName}
+                  </Typography>
+                </Link>
                 <Typography variant="body2" style={{ lineHeight: "0.95" }}>
                   {avatar.bio}
                 </Typography>
                 <Typography variant="caption">
-                  {/* {getDate ? getDate.toDateString() :} */}
                   {data.publishedAt
                     ? new Date(data.publishedAt.toMillis()).toDateString()
                     : "Just now"}
