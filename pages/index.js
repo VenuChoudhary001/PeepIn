@@ -6,7 +6,6 @@ function Landing() {
   return (
     <div style={{ backgroundColor: "#fff", height: "750px" }}>
       <LandingHeader />
-      {/* <hr style={{ border: "3px solid darkgrey" }} /> */}
       <Grid
         container
         justify="flex-start"

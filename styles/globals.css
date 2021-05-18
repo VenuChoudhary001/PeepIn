@@ -190,7 +190,7 @@ body {
   left: 0;
   width: 100%;
 
-  background: url("https://source.unsplash.com/random") no-repeat center/cover;
+  background: url("../public/background.png") no-repeat center/cover;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
@@ -203,21 +203,29 @@ body {
   position: relative;
   overflow-x: hidden;
   overflow-y: hidden;
+  object-fit: contain;
+  width: 100%;
 }
 .thumbnail__content {
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 0;
   opacity: 0;
+  margin: 1px auto;
+  text-align: center;
 }
 .thumbnail__image {
   object-fit: contain;
   width: 100%;
+  min-height: 100%;
   max-width: 600px;
 }
-.thumbnail__root:hover > .thumbnail__content {
+.thumbnail__root:hover .thumbnail__content {
   transition: all 0.25s linear;
   opacity: 1;
+}
+.thumbnail__image:hover {
+  opacity: 0.25;
 }
 .header__button {
   padding: 5px 25px;
@@ -263,4 +271,12 @@ body {
 .sorry__image__root {
   margin: 1px auto;
   max-width: 700px;
+}
+.footer {
+  min-height: 100px;
+  width: 100%;
+  padding: 10px;
+  background-color: #545454;
+  color: #ffff;
+  margin: 1px auto;
 }

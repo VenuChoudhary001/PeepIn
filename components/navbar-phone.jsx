@@ -102,7 +102,9 @@ function Navbar() {
               <Typography variant="subtitle2">Home</Typography>
             </Grid>
             <Grid item xs={4} className="text-center">
-              <SupervisorAccountIcon />
+              <Link href="/network">
+                <SupervisorAccountIcon />
+              </Link>
 
               <Typography variant="subtitle2">My Network</Typography>
             </Grid>

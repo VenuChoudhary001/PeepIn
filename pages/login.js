@@ -43,9 +43,9 @@ function Login() {
     if (email && password) {
       try {
         const USER = await auth.signInWithEmailAndPassword(email, password);
-        console.log("this is user", USER);
+
         const data = await USER.user;
-        console.log("this is data", data);
+
         setDisplay(!display);
         setDisplayMessage({
           mess: `WELOME BACK `,
@@ -53,8 +53,7 @@ function Login() {
         });
         const getUSER_DATA = await db.collection("Users").doc(data.uid).get();
         const USER_INFO = await getUSER_DATA.data();
-        console.log("this is user data", getUSER_DATA);
-        console.log("this is user info", USER_INFO);
+
         setUser({ ...USER_INFO });
         route.replace("/home/home");
       } catch (error) {
@@ -94,7 +93,9 @@ function Login() {
               <Typography variant="h4" color="secondary">
                 Log In
               </Typography>
-              <hr style={{ border: "3px solid darkgrey" }} />
+              <hr
+                style={{ border: "3px solid #123456", background: "#123456" }}
+              />
             </Grid>
             <Grid
               item

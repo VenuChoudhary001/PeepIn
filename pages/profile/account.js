@@ -1,4 +1,4 @@
-import { Container, Grid } from "@material-ui/core";
+import { Button, Container, Grid } from "@material-ui/core";
 import React, { useContext } from "react";
 import AccountHeader from "../../components/account-header";
 import Sorry from "../../components/sorry";
@@ -15,6 +15,7 @@ function Account() {
         <Grid item>
           <AccountHeader user={user} type="self" />
         </Grid>
+
         <Container>
           <div className="mb-2">
             <Grid
@@ -23,12 +24,9 @@ function Account() {
               justify="flex-start"
               alignItems="center"
               direction="row"
-              spacing={2}
+              spacing={1}
             >
-              <Thumbnails
-                image="https://source.unsplash.com/random"
-                content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate provident, nesciunt quo perferendis eius in dolor quos, molestiae explicabo sit veritatis, nemo vero ducimus quisquam!"
-              />
+              <Thumbnails id={user.uid} />
             </Grid>
           </div>
         </Container>

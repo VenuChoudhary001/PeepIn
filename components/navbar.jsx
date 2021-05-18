@@ -4,22 +4,18 @@ import {
   Grid,
   Toolbar,
   Typography,
-  Icon,
   IconButton,
   makeStyles,
-  Box,
 } from "@material-ui/core";
 import React from "react";
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
 import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import AddIcon from "@material-ui/icons/Add";
-import ControlCameraIcon from "@material-ui/icons/ControlCamera";
 
 import Link from "next/link";
 function NavWideScreen() {
-  const useStyles = makeStyles((theme) => ({
+  const useStyles = makeStyles({
     root: {
       marginLeft: "auto",
     },
@@ -52,7 +48,7 @@ function NavWideScreen() {
         },
       },
     },
-  }));
+  });
   const classes = useStyles();
   return (
     <>
@@ -75,25 +71,17 @@ function NavWideScreen() {
                 // className="d-flex"
               >
                 <Grid item>
-                  <Icon color="secondary" className={classes.iconButton}>
-                    <ControlCameraIcon />
-                  </Icon>
-                </Grid>
-                <Grid item>
                   <Link href="/home">
-                    <Typography
-                      variant="h4"
-                      style={{ fontWeight: "700", cursor: "pointer" }}
-                    >
+                    <Typography variant="h3" style={{ cursor: "pointer" }}>
                       Peep
                     </Typography>
                   </Link>
                 </Grid>
                 <Grid item>
                   <Typography
-                    variant="h4"
+                    variant="h3"
                     color="secondary"
-                    style={{ fontWeight: "700" }}
+                    // style={{ fontWeight: "700" }}
                   >
                     In
                   </Typography>
@@ -127,7 +115,9 @@ function NavWideScreen() {
                   <Typography variant="body2">Home</Typography>
                 </Grid>
                 <Grid item className="text-center" xs={4}>
-                  <SupervisorAccountIcon />
+                  <Link href="/network">
+                    <SupervisorAccountIcon />
+                  </Link>
 
                   <Typography variant="body2">My Network</Typography>
                 </Grid>

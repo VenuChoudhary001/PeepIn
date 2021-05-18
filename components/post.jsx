@@ -22,6 +22,7 @@ import {
   serverTime,
 } from "../lib/firebase";
 import ProfileContext from "../context/user";
+import Loading from "./loading";
 const useStyles = makeStyles((theme) => ({
   largeAvatar: {
     width: theme.spacing(6),
@@ -60,7 +61,11 @@ function Post({ data }) {
   }, []);
 
   if (!avatar) {
-    return <>Loading....</>;
+    return (
+      <>
+        <Loading />
+      </>
+    );
   }
 
   const handleLike = () => {

@@ -15,6 +15,7 @@ import ProfileContext from "../context/user";
 import ImageUpload from "../helpers/imageUpload";
 import UploadText from "../helpers/uploadText";
 import { db } from "../lib/firebase";
+import { useRouter } from "next/router";
 
 const useStyles = makeStyles((theme) => ({
   rootAvatar: {
@@ -30,11 +31,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function AccountHeader({ user, type }) {
-  // const { setUser, user } = useContext(ProfileContext);
+  const { setUser } = useContext(ProfileContext);
   const [open, setOpen] = useState(false);
   const [addBio, setAddBio] = useState(false);
   const classes = useStyles();
   const [connect, setConnect] = useState();
+  const route = useRouter();
+  const handleSignOut = (e) => {
+    e.preventDefault();
+    setUser();
+    route.replace("/login");
+  };
   useEffect(() => {
     db.collection("Users")
       .doc(user.uid)
@@ -91,7 +98,7 @@ function AccountHeader({ user, type }) {
           >
             <Grid item>
               <Typography variant="subtitle2">
-                {user.bio || "ADD BIO"}
+                {type !== "other" ? user.bio || "ADD BIO" : user.bio || ""}
                 {type !== "other" ? (
                   <Icon
                     style={{ cursor: "pointer" }}
@@ -113,13 +120,28 @@ function AccountHeader({ user, type }) {
             alignItems="center"
             className="px-3"
           >
-            <Grid item>
-              <Typography variant="subtitle1">
-                {connect > 0 ? connect : "0"}
+            <Grid item xs>
+              <Typography variant="subtitle1" style={{ fontWeight: "bolder" }}>
+                {connect > 0 ? `${connect}  ` : "0 "}
                 Connections
               </Typography>
             </Grid>
+            <Grid item></Grid>
           </Grid>
+          {type !== "other" ? (
+            <Grid item>
+              <Button
+                variant="contained"
+                style={{ backgroundColor: "#123456", color: "#fff" }}
+                className="my-2 mx-2"
+                onClick={handleSignOut}
+              >
+                Sign Out
+              </Button>
+            </Grid>
+          ) : (
+            ""
+          )}
 
           <hr style={{ border: "2px solid darkgrey" }} />
         </Container>

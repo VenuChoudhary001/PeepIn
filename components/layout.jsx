@@ -5,6 +5,7 @@ import Navbar from "./navbar-phone";
 import NavWideScreen from "./navbar";
 import { useTheme } from "@material-ui/styles";
 import { useRouter } from "next/router";
+import Footer from "./footer";
 function Layout({ children }) {
   const theme = useTheme();
   const mdUp = useMediaQuery(theme.breakpoints.up("md"));
@@ -45,21 +46,34 @@ function Layout({ children }) {
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200&display=swap"
           rel="stylesheet"
         />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600&display=swap"
+          rel="stylesheet"
+        ></link>
       </Head>
+      <div style={{ minHeight: "800px" }}>
+        {route.pathname !== "/" &&
+        route.pathname !== "/login" &&
+        route.pathname !== "/signup" ? (
+          mdUp ? (
+            <NavWideScreen />
+          ) : (
+            <Navbar />
+          )
+        ) : (
+          ""
+        )}
+
+        {children}
+      </div>
       {route.pathname !== "/" &&
       route.pathname !== "/login" &&
       route.pathname !== "/signup" ? (
-        mdUp ? (
-          <NavWideScreen />
-        ) : (
-          <Navbar />
-        )
+        <Footer />
       ) : (
         ""
       )}
-
-      {children}
-
       {/* BOOTSTRAP SCRIPTS */}
       <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"

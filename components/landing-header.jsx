@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 const useStyles = makeStyles((theme) => ({
   iconButton: {
     "& .MuiSvgIcon-root": {
-      fontSize: "2.5rem",
+      fontSize: "2.4rem",
       fontWeight: "bold",
     },
   },
@@ -34,31 +34,26 @@ function LandingHeader() {
           <Container>
             <Grid container justify="space-between" alignItems="center">
               <Grid item container xs justify="flex-start" alignItems="center">
-                <Grid item>
+                {/* <Grid item>
                   <Icon color="secondary" className={classes.iconButton}>
-                    <ControlCameraIcon fontSize="40" />
+                    <ControlCameraIcon />
                   </Icon>
-                </Grid>
+                </Grid> */}
                 <Grid item>
                   <Link href="/">
-                    <Typography
-                      variant="h3"
-                      style={{ fontWeight: "700", cursor: "pointer" }}
-                    >
+                    <Typography variant="h3" style={{ cursor: "pointer" }}>
                       Peep
                     </Typography>
                   </Link>
                 </Grid>
                 <Grid item>
-                  {/* <Link href="/"> */}
                   <Typography
                     variant="h3"
                     color="secondary"
-                    style={{ fontWeight: "700" }}
+                    // style={{ fontWeight: "700" }}
                   >
                     In
                   </Typography>
-                  {/* </Link> */}
                 </Grid>
               </Grid>
 

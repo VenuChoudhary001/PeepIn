@@ -11,7 +11,7 @@ import {
 import EmojiFoodBeverageIcon from "@material-ui/icons/EmojiFoodBeverage";
 import FreeBreakfastIcon from "@material-ui/icons/FreeBreakfast";
 import PhotoSizeSelectActualIcon from "@material-ui/icons/PhotoSizeSelectActual";
-import InputOption from "../components/inputOption";
+import InputOption from "./inputOption";
 import VideocamIcon from "@material-ui/icons/Videocam";
 import ArtTrackIcon from "@material-ui/icons/ArtTrack";
 import Link from "next/link";

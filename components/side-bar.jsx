@@ -4,9 +4,11 @@ import {
   Avatar,
   Typography,
   makeStyles,
+  Button,
 } from "@material-ui/core";
-import React from "react";
-
+import React, { useContext } from "react";
+import { useRouter } from "next/router";
+import ProfileContext from "../context/user";
 const useStyles = makeStyles((theme) => ({
   rootAvatar: {
     width: theme.spacing(9),
@@ -20,27 +22,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SideBar({ imageURL, user, bio, followersCount }) {
+function SideBar({ imageURL, user, bio, connections }) {
   const classes = useStyles();
+  const route = useRouter();
+  const { setUser } = useContext(ProfileContext);
+  const handleSignOut = (e) => {
+    e.preventDefault();
+    setUser();
+    route.replace("/login");
+  };
+
   return (
     <>
       <Container className={classes.root}>
         <div className="side__bar__root mt-3">
-          <Grid
-            container
-            // justify="flex-start"
-            // alignItems="center"
-            direction="column"
-            className="text-center"
-          >
+          <Grid container direction="column" className="text-center">
             <Grid item xs={12}>
               <div className="side__bar__avatar ">
                 <div className="side__bar__avatar__background"></div>
                 <Avatar
                   src={imageURL}
-                  alt="user"
+                  alt={user}
                   className={classes.rootAvatar}
-                  //   style={{ position: "absolute", top: "50%", left: "50%" }}
                 />
               </div>
             </Grid>
@@ -72,9 +75,19 @@ function SideBar({ imageURL, user, bio, followersCount }) {
                   variant="caption"
                   style={{ color: "rgb(29,161,242)", fontWeight: "bold" }}
                 >
-                  {followersCount}
+                  {connections}
                 </Typography>
               </Grid>
+            </Grid>
+            <Grid item>
+              <Button
+                variant="contained"
+                style={{ backgroundColor: "#123456", color: "#fff" }}
+                className="my-2"
+                onClick={handleSignOut}
+              >
+                Sign Out
+              </Button>
             </Grid>
           </Grid>
         </div>

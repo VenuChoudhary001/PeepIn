@@ -34,8 +34,8 @@ const THEME = createMuiTheme({
       fontWeight: 500,
     },
     h3: {
-      fontFamily: "Antonio",
-      fontWeight: 700,
+      fontFamily: "Teko",
+      fontWeight: 500,
     },
     h5: { fontFamily: "Poppins", fontWeight: 200 },
   },

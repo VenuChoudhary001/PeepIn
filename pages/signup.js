@@ -107,7 +107,9 @@ function Signup() {
               <Typography variant="h4" color="secondary">
                 Sign Up
               </Typography>
-              <hr style={{ border: "2px solid darkgrey" }} />
+              <hr
+                style={{ border: "2px solid #123456", background: "#123456" }}
+              />
             </Grid>
             <Grid
               item
