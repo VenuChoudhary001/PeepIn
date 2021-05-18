@@ -5,7 +5,7 @@ import AccountHeader from "../../components/account-header";
 import { Button, Container, Grid } from "@material-ui/core";
 import ProfileContext from "../../context/user";
 import Sorry from "../../components/sorry";
-
+import Thumbnails from "../../components/thumbnails";
 function Particulars() {
   const [data, setData] = useState();
   const { user } = useContext(ProfileContext);
@@ -77,16 +77,11 @@ function Particulars() {
   return (
     <>
       <Container>
-        <Grid
-          container
-          justify="flex-start"
-          direction="column"
-          alignItems="flex-start"
-        >
-          <Grid item>
+        <Grid container justify="flex-start" alignItems="flex-start">
+          <Grid item xs={12}>
             <AccountHeader user={data} type="other" />
           </Grid>
-          <Grid item>
+          <Grid item={12}>
             <Button
               variant="contaiend"
               style={{ backgroundColor: "#d81b60", color: "#fff" }}
@@ -94,6 +89,20 @@ function Particulars() {
             >
               {follow ? "Connect" : "Following"}
             </Button>
+          </Grid>
+          <Grid item xs={12}>
+            <div className="mb-2 my-1">
+              <Grid
+                item
+                container
+                justify="flex-start"
+                alignItems="center"
+                direction="row"
+                spacing={1}
+              >
+                <Thumbnails id={route.query.id} />
+              </Grid>
+            </div>
           </Grid>
         </Grid>
       </Container>

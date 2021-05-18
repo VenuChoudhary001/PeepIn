@@ -57,9 +57,20 @@ function AccountHeader({ user, type }) {
         alignItems="flex-start"
         direction="column"
       >
-        <Grid item container justify="flex-start" alignItems="flex-start">
+        <Grid
+          item
+          xs={12}
+          container
+          justify="flex-start"
+          alignItems="flex-start"
+        >
           <div className="account__header__banner__root ">
-            <div className="account__header__banner"></div>
+            <div className="account__header__banner">
+              <img
+                src="/background.png"
+                className="account__header__banner__image"
+              />
+            </div>
             <div className="account__header__avatar">
               <Badge
                 badgeContent={

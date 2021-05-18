@@ -176,7 +176,7 @@ body {
   position: relative;
   height: 275px;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 1px auto;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
@@ -190,9 +190,19 @@ body {
   left: 0;
   width: 100%;
 
-  background: url("../public/background.png") no-repeat center/cover;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+}
+.account__header__banner__image {
+  position: absolute;
+  height: 200px;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  width: 100%;
+  max-width: 1200px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 }
 .account__header__avatar {
   position: absolute;
