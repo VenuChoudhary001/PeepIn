@@ -214,7 +214,7 @@ function Post({ data }) {
               direction="row"
               justify="center"
               alignItems="center"
-              className="mx-2 text-center pb-1 mb-1"
+              className="mx-1 text-center pb-1 mb-1"
             >
               <Grid item xs={4}>
                 <IconButton onClick={handleLike}>

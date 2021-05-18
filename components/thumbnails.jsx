@@ -27,7 +27,7 @@ function Thumbnails({ id }) {
       {thumbs.map((item) => {
         if (item) {
           return (
-            <Grid item xs={4} sm={4} className="mb-4">
+            <Grid item xs={12} sm={4} className="mb-4">
               <div className="thumbnail__root">
                 <div className="thumbnail__content">
                   <Typography variant="subtitle1">{item.content}</Typography>

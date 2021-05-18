@@ -59,6 +59,8 @@ function Particulars() {
     const getData = await db.collection("Users").doc(route.query.id).get();
 
     const info = await getData.data();
+
+    setData(info);
   };
   useEffect(() => {
     getUserInfo();

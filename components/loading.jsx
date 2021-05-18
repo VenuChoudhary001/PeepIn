@@ -4,9 +4,9 @@ function Loading() {
   return (
     <>
       <div className="loading">
-        <div class="blocks">
-          <div class="block orange"></div>
-          <div class="block blue"></div>
+        <div className="blocks">
+          <div className="block orange"></div>
+          <div className="block blue"></div>
         </div>
       </div>
     </>
