@@ -21,7 +21,7 @@ function Thumbnails({ id }) {
       </>
     );
   }
-  console.log("this si from thumn", thumbs);
+
   return (
     <>
       {thumbs.map((item) => {

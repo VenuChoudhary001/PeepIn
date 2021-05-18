@@ -22,7 +22,6 @@ function ListNetwork({ id }) {
         setData(querySnapshot.data());
       });
   }, []);
-  console.log("this si from list", data);
 
   if (!data) {
     return <Loading />;

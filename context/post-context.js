@@ -16,8 +16,6 @@ export const ALL_POST_PROVIDER = ({ children }) => {
           })
         );
       });
-      // setAllPost([...allPost, { ...myPost }]);
-      // console.log("Data fetched from post context", allPost);
     }
   }, [myPost]);
   return (

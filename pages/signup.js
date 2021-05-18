@@ -26,9 +26,9 @@ function Signup() {
     if (userName && email && password) {
       try {
         const USER = await auth.createUserWithEmailAndPassword(email, password);
-        console.log("this is user", user);
+
         const data = await USER.user;
-        console.log("this is data", data);
+
         setDisplay(!display);
         setDisplayMessage({
           mess: `WELCOME ${userName} 🚀`,
@@ -65,7 +65,7 @@ function Signup() {
             followingList: [],
           },
         });
-        console.log(user);
+
         route.replace("/home/home");
       } catch (error) {
         setDisplay(!display);

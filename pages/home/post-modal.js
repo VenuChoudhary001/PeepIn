@@ -18,9 +18,8 @@ import { db, serverTime } from "../../lib/firebase";
 import { useRouter } from "next/router";
 function PostModal() {
   const route = useRouter();
-  const { myPost, setMyPost, setAllPost, allPost, picURL } = useContext(
-    ALL_POSTS
-  );
+  const { myPost, setMyPost, setAllPost, allPost, picURL } =
+    useContext(ALL_POSTS);
 
   const { user } = useContext(ProfileContext);
   const [content, setContent] = useState();
@@ -72,11 +71,9 @@ function PostModal() {
       comments: [],
     });
     setContent();
-    console.log("This is my post", myPost);
   };
   useEffect(() => {
     if (myPost) {
-      console.log("From use effect create post", myPost);
       db.collection("posts").add({
         ...myPost,
       });

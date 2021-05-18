@@ -28,14 +28,12 @@ function ImageUpload({ open, close, bucket }) {
         (snapshot) => {
           var progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
         },
         (error) => {
           console.log(error.message);
         },
         () => {
           uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-            console.log("File available at", downloadURL);
             if (bucket == "profile") {
               db.collection("Users")
                 .doc(user.uid)
@@ -51,7 +49,6 @@ function ImageUpload({ open, close, bucket }) {
 
             if (bucket === "post") {
               setPicURL(downloadURL);
-              console.log("This is from imageUpload :", myPost);
             }
           });
         }

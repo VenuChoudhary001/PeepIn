@@ -20,7 +20,6 @@ function Network() {
         setList(querySnapshot.data().followers.followersList);
       });
   }, []);
-  console.log("this is list", list);
 
   if (!list) {
     return <Loading />;

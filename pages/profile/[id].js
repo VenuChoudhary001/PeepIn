@@ -10,7 +10,7 @@ function Particulars() {
   const [data, setData] = useState();
   const { user } = useContext(ProfileContext);
   const route = useRouter();
-  console.log(route.query);
+
   const [follow, setFollower] = useState(true);
   if (!user) {
     return (
@@ -57,10 +57,8 @@ function Particulars() {
 
   const getUserInfo = async () => {
     const getData = await db.collection("Users").doc(route.query.id).get();
-    console.log("this is", getData);
+
     const info = await getData.data();
-    console.log(info);
-    setData(info);
   };
   useEffect(() => {
     getUserInfo();

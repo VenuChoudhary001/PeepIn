@@ -41,10 +41,6 @@ function Post({ data }) {
   const [postComment, setPostComment] = useState(false);
   const { likes } = data;
   const { likesCount, usersLiked } = likes;
-  console.log("this is likes count :", likes, usersLiked, likesCount);
-  // if (data.publishedAt) {
-  //   const getDate = new Date(data.publishedAt.toMillis());
-  // }
 
   useEffect(() => {
     db.collection("Users")
@@ -125,7 +121,6 @@ function Post({ data }) {
               .doc(doc.id)
               .get()
               .then((querySnapshot) => {
-                console.log(querySnapshot.data());
                 setAllComments(querySnapshot.data().comments);
               });
           }

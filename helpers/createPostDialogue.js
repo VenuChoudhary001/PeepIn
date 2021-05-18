@@ -11,9 +11,8 @@ import { v4 as uuidv4 } from "uuid";
 function CreatePostDialogue({ open, close }) {
   const [content, setContent] = useState();
 
-  const { myPost, setMyPost, setAllPost, allPost, picURL } = useContext(
-    ALL_POSTS
-  );
+  const { myPost, setMyPost, setAllPost, allPost, picURL } =
+    useContext(ALL_POSTS);
 
   const { user } = useContext(ProfileContext);
 
@@ -35,13 +34,11 @@ function CreatePostDialogue({ open, close }) {
       comments: [],
     });
     setContent();
-    console.log("This is my post", myPost);
+
     close(false);
   };
   useEffect(() => {
     if (myPost) {
-      console.log("From use effect create post", myPost);
-
       db.collection("posts").add({ ...myPost });
 
       setMyPost();

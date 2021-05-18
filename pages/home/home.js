@@ -44,7 +44,6 @@ function Home() {
       });
   }, [myPost]);
 
-  console.log("All posts from home", allPost);
   return (
     <>
       <Container className="home_layout_root ">
