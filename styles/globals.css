@@ -61,24 +61,24 @@ body {
 }
 .post__container {
   background-color: white;
-  max-width: 550px;
+  max-width: 600px;
   margin: 1px auto;
   /* border: 1px solid lightgrey; */
 }
 .post__image__container {
   /* margin: 1px auto; */
-  min-width: 100%;
-  max-width: 550px;
+  width: 100%;
+  max-width: 700px;
 }
 .post__image {
   object-fit: contain;
-  min-width: 100%;
-  max-width: 550px;
+  width: 100%;
+  max-width: 700px;
   /* margin: 1px auto; */
 }
 .home__share__thoughts {
   background-color: #fff;
-  max-width: 550px;
+  max-width: 600px;
   margin: 1px auto;
 }
 .home__share__thoughts__input {
@@ -209,7 +209,7 @@ body {
 .thumbnail__content {
   position: absolute;
   top: 50%;
-  left: 10%;
+  left: 0;
   opacity: 0;
   margin: 1px auto;
   text-align: center;
