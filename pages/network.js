@@ -27,8 +27,11 @@ function Network() {
   }
   if (list.length == 0) {
     return (
-      <div style={{ margin: "1px auto", width: "100%" }}>
-        <Typography variant="h5">No Connections</Typography>
+      <div
+        style={{ margin: "1px auto", width: "100%" }}
+        className="text-center my-4"
+      >
+        <Typography variant="h5">No Connections Yet</Typography>
       </div>
     );
   }

@@ -90,6 +90,11 @@ function ImageUpload({ open, close, bucket }) {
             />
           </Grid>
           <Grid item>
+            <Typography variant="caption" style={{ color: "red" }}>
+              ***DO not upload images of size greater than 1MB
+            </Typography>
+          </Grid>
+          <Grid item>
             <Button
               variant="contained"
               size="small"

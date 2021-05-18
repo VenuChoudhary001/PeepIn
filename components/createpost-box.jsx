@@ -84,22 +84,22 @@ function CreatePost() {
                 justify="space-evenly"
                 alignItems="flex-start"
               >
-                <Grid item>
+                <Grid item onClick={() => setShowPostBox(!showPostBox)}>
                   <InputOption
                     icon={<PhotoSizeSelectActualIcon />}
-                    type="Photo"
+                    type="Picture"
                     color="rgb(29,161,242)"
                     bucket="post"
                   />
                 </Grid>
-                <Grid item>
+                <Grid item onClick={() => setShowPostBox(!showPostBox)}>
                   <InputOption
                     icon={<VideocamIcon />}
                     type="Video"
                     color="rgb(127,193,94)"
                   />
                 </Grid>
-                <Grid item>
+                <Grid item onClick={() => setShowPostBox(!showPostBox)}>
                   <InputOption
                     icon={<ArtTrackIcon />}
                     type="Write an article"
